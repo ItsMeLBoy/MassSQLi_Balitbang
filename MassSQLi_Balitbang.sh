@@ -45,7 +45,7 @@ read -p $'\e[1;34m[\e[1;31m?\e[1;34m]\e[1;37m want to use auto dork or use your 
 case $option in
 	1) #menu 1
 		read -p $'\e[1;34m[\e[1;31m?\e[1;34m]\e[1;37m input dork: \e[1;33m' dork
-		get=$(curl -s -X GET "https://cse.google.com/cse/element/v1?rsz=filtered_cse&num=10&hl=en&source=gcsc&gss=.com&cselibv=$(echo "$cse" | sed -n 38p | cut -d '"' -f4)&cx=partner-pub-2698861478625135:3033704849&q=$(echo -ne "$dork" | od -An -tx1 | tr ' ' % | xargs printf "%s")&safe=off&cse_tok=$(echo "$cse" | grep -o "cse_token.*" | cut -d '"' -f3)&exp=csqr,$(echo "$cse" | sed -n 37p | cut -d '"' -f6)&oq=$(echo -ne "$dork" | od -An -tx1 | tr ' ' % | xargs printf "%s")&callback=google.search.cse.api16174" | grep -o "visibleUrl.*")
+		get=$(curl -s -X GET "https://cse.google.com/cse/element/v1?rsz=filtered_cse&num=1000&hl=en&source=gcsc&gss=.com&cselibv=$(echo "$cse" | sed -n 38p | cut -d '"' -f4)&cx=partner-pub-2698861478625135:3033704849&q=$(echo -ne "$dork" | od -An -tx1 | tr ' ' % | xargs printf "%s")&safe=off&cse_tok=$(echo "$cse" | grep -o "cse_token.*" | cut -d '"' -f3)&exp=csqr,$(echo "$cse" | sed -n 37p | cut -d '"' -f6)&oq=$(echo -ne "$dork" | od -An -tx1 | tr ' ' % | xargs printf "%s")&callback=google.search.cse.api16174" | grep -o "visibleUrl.*")
 		echo -e "${blue}[${yellow}*${blue}] ${white}duplicate the target and mix it to get maximum results"
 		sleep 0.10 #delete this if you are lazy to wait
 		echo "$get" > users ; cat users | awk '{gsub(/",/,"/users/listmemberall.php")}1' | cut -d '"' -f3 > list ; echo "$get" > member ; cat member | awk '{gsub(/",/,"/member/listmemberall.php")}1' | cut -d '"' -f3 >> list
